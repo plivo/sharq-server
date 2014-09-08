@@ -68,6 +68,14 @@ class SharQServerTestCase(unittest.TestCase):
             response_data['payload'], {'message': 'Hello, world.'})
         self.assertEqual(response_data['queue_id'], 'johndoe')
 
+    def test_finish_fail(self):
+        # mark a non existent job as finished
+        response = self.app.post(
+            '/finish/sms/johndoe/ef022088-d2b3-44ad-bf0d-a93d6d93b82c/')
+        self.assertEqual(response.status_code, 404)
+        response_data = json.loads(response.data)
+        self.assertEqual(response_data['status'], 'failure')
+
     def test_finish(self):
         # enqueue a job
         request_params = {
@@ -82,7 +90,7 @@ class SharQServerTestCase(unittest.TestCase):
         # dequeue a job
         self.app.get('/dequeue/sms/')
 
-        # make the job as finished
+        # mark the job as finished
         response = self.app.post(
             '/finish/sms/johndoe/ef022088-d2b3-44ad-bf0d-a93d6d93b82c/')
         self.assertEqual(response.status_code, 200)

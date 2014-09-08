@@ -117,6 +117,8 @@ class SharQServer(object):
 
         try:
             response = self.sq.finish(**request_data)
+            if response['status'] == 'failure':
+                return jsonify(**response), 404
         except Exception, e:
             response['message'] = e.message
             return jsonify(**response), 400
