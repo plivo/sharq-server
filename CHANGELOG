@@ -1,0 +1,2 @@
+MINOR RELEASE v0.0.2
+	- returns 404 on finish to a non existent job.
