@@ -10,7 +10,6 @@ from sharq import SharQ
 
 
 class SharQServer(object):
-
     """Defines a HTTP based API on top of SharQ and
     exposed the app to run the server.
     """
@@ -39,6 +38,9 @@ class SharQServer(object):
         self.app.add_url_rule(
             '/finish/<queue_type>/<queue_id>/<job_id>/',
             view_func=self._view_finish, methods=['POST'])
+        self.app.add_url_rule(
+            '/interval/<queue_type>/<queue_id>/',
+            view_func=self._view_interval, methods=['POST'])
         self.app.add_url_rule(
             '/metrics/', defaults={'queue_type': None, 'queue_id': None},
             view_func=self._view_metrics, methods=['GET'])
@@ -125,6 +127,34 @@ class SharQServer(object):
 
         return jsonify(**response)
 
+    def _view_interval(self, queue_type, queue_id):
+        """Updates the queue interval in SharQ."""
+        response = {
+            'status': 'failure'
+        }
+        try:
+            request_data = json.loads(request.data)
+            interval = request_data['interval']
+        except Exception, e:
+            response['message'] = e.message
+            return jsonify(**response), 400
+
+        request_data = {
+            'queue_type': queue_type,
+            'queue_id': queue_id,
+            'interval': interval
+        }
+
+        try:
+            response = self.sq.interval(**request_data)
+            if response['status'] == 'failure':
+                return jsonify(**response), 404
+        except Exception, e:
+            response['message'] = e.message
+            return jsonify(**response), 400
+
+        return jsonify(**response)
+
     def _view_metrics(self, queue_type, queue_id):
         """Gets SharQ metrics based on the params."""
         response = {
@@ -143,6 +173,7 @@ class SharQServer(object):
             return jsonify(**response), 400
 
         return jsonify(**response)
+
 
 def setup_server(config_path):
     """Configure SharQ server, start the requeue loop

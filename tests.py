@@ -97,6 +97,38 @@ class SharQServerTestCase(unittest.TestCase):
         response_data = json.loads(response.data)
         self.assertEqual(response_data['status'], 'success')
 
+    def test_interval(self):
+        # enqueue a job
+        request_params = {
+            'job_id': 'ef022088-d2b3-44ad-bf0d-a93d6d93b82c',
+            'payload': {'message': 'Hello, world.'},
+            'interval': 1000
+        }
+        self.app.post(
+            '/enqueue/sms/johndoe/', data=json.dumps(request_params),
+            content_type='application/json')
+
+        # change the interval
+        request_params = {
+            'interval': 5000
+        }
+        response = self.app.post(
+            '/interval/sms/johndoe/', data=json.dumps(request_params),
+            content_type='application/json')
+        response_data = json.loads(response.data)
+        self.assertEqual(response_data['status'], 'success')
+
+    def test_interval_fail(self):
+        # change the interval
+        request_params = {
+            'interval': 5000
+        }
+        response = self.app.post(
+            '/interval/sms/johndoe/', data=json.dumps(request_params),
+            content_type='application/json')
+        response_data = json.loads(response.data)
+        self.assertEqual(response_data['status'], 'failure')
+
     def test_metrics(self):
         response = self.app.get('/metrics/')
         response_data = json.loads(response.data)
