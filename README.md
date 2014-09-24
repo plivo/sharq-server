@@ -5,8 +5,10 @@ SharQ Server is an rate limited API queuing server based on the [SharQ library](
 
 ## Installation
 
+SharQ Server can be installed using [pip](http://pip.readthedocs.org/en/latest/installing.html) as follows
+
 ```
-pip install sharq-server
+pip install sharqserver
 ```
 
 ## Running the server
