@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='SharQServer',
-    version='0.1.0',
+    version='0.2.0',
     url='https://github.com/plivo/sharq-server',
     author='Plivo Team',
     author_email='hello@plivo.com',
@@ -14,7 +14,7 @@ setup(
     packages=['sharq_server'],
     py_modules=['runner'],
     install_requires=[
-        'SharQ==0.2.0',
+        'SharQ==0.3.0',
         'Flask==0.10.1',
         'Jinja2==2.7.2',
         'MarkupSafe==0.23',
