@@ -1,2 +1,11 @@
+MAJOR RELEASE v0.2.0
+	- Supports the requeue limit feature
+	  of SHARQ which bounds the number of
+	  job retries in SHARQ.
+
+MAJOR RELEASE v0.1.0
+	- Adds the interval API which lets users
+	  change dequeue in real time.
+
 MINOR RELEASE v0.0.2
 	- returns 404 on finish to a non existent job.

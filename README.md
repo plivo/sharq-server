@@ -7,7 +7,7 @@ SHARQ Server is an flexible, rate limited queuing system based on the [SHARQ Cor
 
 SHARQ Server is a flexible, open source, rate limited queuing system. Based on the [Leaky Bucket Algorithm](http://en.wikipedia.org/wiki/Leaky_bucket#The_Leaky_Bucket_Algorithm_as_a_Queue), SHARQ lets you create queues dynamically and update their rate limits in real time.
 
-SHARQ consists of two components - the core component and the server component. The [SHARQ core](https://github.com/plivo/sharq) is built on [Redis](https://redis.io), using Python and Lua, and the SHARQ Server is built using Flask and Gevent and talks HTTP.
+SHARQ consists of two components - the core component and the server component. The [SHARQ core](https://github.com/plivo/sharq) is built on [Redis](https://redis.io), using Python and Lua, and the SHARQ Server is built using [Flask](http://flask.pocoo.org/) and [Gevent](http://www.gevent.org/) and talks HTTP.
 
 ## Installation
 
