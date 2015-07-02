@@ -4,8 +4,8 @@ MarkupSafe==0.23
 SharQ==0.2.0
 Werkzeug==0.9.4
 argparse==1.2.1
-gevent==1.0.1
-greenlet==0.4.2
+gevent==1.0.2
+greenlet==0.4.7
 gunicorn==19.0.0
 itsdangerous==0.24
 msgpack-python==0.4.2
