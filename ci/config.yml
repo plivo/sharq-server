@@ -1,0 +1,4 @@
+parent: sms
+serviceName: npssharq
+hipchatRoom: cicd-tests-dev-notifications
+language: python
