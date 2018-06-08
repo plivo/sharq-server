@@ -17,4 +17,4 @@ conn_type            : tcp_sock ; or tcp_sock
 ;; unix_socket_path     : /var/run/redis/redis.sock
 ;; tcp connection settings
 port                 : 6379
-host                 : $$redishost$$
+host                 : {{ SHARQ_REDIS }}
