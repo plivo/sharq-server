@@ -7,7 +7,7 @@ RUN virtualenv /opt/sharq-server
 RUN . /opt/sharq-server/bin/activate && /opt/sharq-server/bin/pip install --no-cache-dir -r /opt/sharq-server/requirements.txt && /opt/sharq-server/bin/python setup.py install -f && /opt/sharq-server/bin/pip install uwsgi
 ADD src/config /etc/sharq-server/config
 ADD src/config/nginx.conf /etc/nginx/nginx.conf
-ADD src/config/nginx-sharq.conf /etc/nginx/config.d/sharq.conf
+ADD src/config/nginx-sharq.conf /etc/nginx/conf.d/sharq.conf
 ADD src/config/sharq-server-basicauth /etc/nginx/config.d/sharq-server-basicauth
 RUN mkdir /var/run/sharq/
 STOPSIGNAL SIGTERM
