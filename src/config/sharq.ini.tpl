@@ -6,7 +6,7 @@ master = true
 autoload = true
 
 # spawn n uWSGI worker processes
-workers = 16
+workers = {{ UWSGI_WORKER }}
 
 # automatically kill workers on master's death
 no-orphans = true
