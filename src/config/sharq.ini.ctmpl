@@ -6,7 +6,7 @@ master = true
 autoload = true
 
 # spawn n uWSGI worker processes
-workers = {{ UWSGI_WORKER }}
+workers = {{key "sms/dev/sharq/config/uwsgi/num_workers" | parseInt}}
 
 # automatically kill workers on master's death
 no-orphans = true
