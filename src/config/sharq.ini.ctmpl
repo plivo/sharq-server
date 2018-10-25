@@ -20,6 +20,11 @@ socket = /var/run/sharq/sharq.sock
 # set mode of created UNIX socket
 chmod-socket = 666
 
+# disable logging
+disable-logging=False
+
+# daemonize
+#daemonize=False
 
 # sharq related
 chdir = /opt/sharq-server
