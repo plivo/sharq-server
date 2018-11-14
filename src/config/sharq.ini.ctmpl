@@ -21,7 +21,7 @@ socket = /var/run/sharq/sharq.sock
 chmod-socket = 666
 
 # disable logging
-disable-logging=False
+disable-logging=True
 
 # daemonize
 #daemonize=False
