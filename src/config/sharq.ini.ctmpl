@@ -21,7 +21,7 @@ socket = /var/run/sharq/sharq.sock
 chmod-socket = 666
 
 {{$loggingKeyName := printf "sms/%s/%s/config/logging/disable" (env "ENVIRONMENT") (env "SHARQ_TYPE")}}
-{{ if key $loggingKeyName }}
+{{ if key $loggingKeyName | parseBool }}
 disable-logging=True
 {{ end }}
 
