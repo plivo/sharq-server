@@ -20,8 +20,10 @@ socket = /var/run/sharq/sharq.sock
 # set mode of created UNIX socket
 chmod-socket = 666
 
-# disable logging
-disable-logging={{ printf "sms/%s/%s/config/logging/disable" (env "ENVIRONMENT") (env "SHARQ_TYPE") | key }}
+{{$loggingKeyName := printf "sms/%s/%s/config/logging/disable" (env "ENVIRONMENT") (env "SHARQ_TYPE")}}
+{{ if keyExists $loggingKeyName }}
+disable-logging=True
+{{ end }}
 
 # daemonize
 #daemonize=False
