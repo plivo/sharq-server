@@ -21,7 +21,7 @@ socket = /var/run/sharq/sharq.sock
 chmod-socket = 666
 
 # disable logging
-disable-logging={{ printf "sms/%s/%s/config/uwsgi/num_workers" (env "ENVIRONMENT") (env "SHARQ_TYPE") | key }}
+disable-logging={{ printf "sms/%s/%s/config/logging/disable" (env "ENVIRONMENT") (env "SHARQ_TYPE") | key }}
 
 # daemonize
 #daemonize=False
