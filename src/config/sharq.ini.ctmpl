@@ -6,7 +6,7 @@ master = true
 autoload = true
 
 # spawn n uWSGI worker processes
-workers = {{ printf "sms/%s/%s/config/uwsgi/num_workers" (env "ENVIRONMENT") (env "SHARQ_TYPE") | key | parseInt }}
+workers = {{ printf "%s/%s/%s/config/uwsgi/num_workers" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") | key | parseInt }}
 
 # automatically kill workers on master's death
 no-orphans = true
@@ -20,7 +20,7 @@ socket = /var/run/sharq/sharq.sock
 # set mode of created UNIX socket
 chmod-socket = 666
 
-{{$loggingKeyName := printf "sms/%s/%s/config/logging/disable" (env "ENVIRONMENT") (env "SHARQ_TYPE")}}
+{{$loggingKeyName := printf "%s/%s/%s/config/logging/disable" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE")}}
 {{ if key $loggingKeyName | parseBool }}
 disable-logging=True
 {{ end }}
