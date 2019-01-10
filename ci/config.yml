@@ -1,4 +1,4 @@
-parent: sms
+parent: common
 serviceName: sharq
 hipchatRoom: cicd-tests-dev-notifications
 language: python
