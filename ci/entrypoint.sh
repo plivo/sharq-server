@@ -6,7 +6,13 @@ set -e
 CONSUL=$CONSUL
 
 
-echo "[ENTRYPOINT] - Starting SharQServer."
+echo "
+      ___ _              ___    ___
+     / __| |_  __ _ _ _ / _ \  / __| ___ _ ___ _____ _ _
+     \__ \ ' \/ _' | '_| (_) | \__ \/ -_) '_\ V / -_) '_|
+     |___/_||_\__,_|_|  \__\_\ |___/\___|_|  \_/\___|_|
+
+     "
 
 /usr/sbin/consul-template \
     -consul-addr "$CONSUL" \

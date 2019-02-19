@@ -17,5 +17,5 @@ conn_type            : tcp_sock ; or tcp_sock
 ;; unix_socket_path     : /var/run/redis/redis.sock
 ;; tcp connection settings
 
-port                 : {{ printf "sms/%s/%s/config/redis/port" (env "ENVIRONMENT") (env "SHARQ_TYPE") | key | parseInt }}
-host                 : {{ printf "sms/%s/%s/config/redis/host" (env "ENVIRONMENT") (env "SHARQ_TYPE") | key }}
+port                 : {{ printf "%s/%s/%s/config/redis/port" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") | key | parseInt }}
+host                 : {{ printf "%s/%s/%s/config/redis/host" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") | key }}
