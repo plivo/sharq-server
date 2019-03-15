@@ -51,4 +51,9 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
-
+Dockerfile0
+Dockerfile1
+Dockerfile_supervisor
+test_sharq.py
+.idea/*
+venv/*
