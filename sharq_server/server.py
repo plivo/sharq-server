@@ -50,6 +50,9 @@ class SharQServer(object):
         self.app.add_url_rule(
             '/metrics/<queue_type>/<queue_id>/',
             view_func=self._view_metrics, methods=['GET'])
+        self.app.add_url_rule(
+            '/deletequeue/<queue_type>/<queue_id>/',
+            view_func=self._view_clear_queue, methods=['DELETE'])
 
     def requeue(self):
         """Loop endlessly and requeue expired jobs."""
@@ -168,6 +171,29 @@ class SharQServer(object):
 
         try:
             response = self.sq.metrics(**request_data)
+        except Exception, e:
+            response['message'] = e.message
+            return jsonify(**response), 400
+
+        return jsonify(**response)
+    
+    def _view_clear_queue(self, queue_type, queue_id):
+        """remove queueu from SharQ based on the queue_type and queue_id."""
+        response = {
+            'status': 'failure'
+        }
+        try:
+            request_data = json.loads(request.data)
+        except Exception, e:
+            response['message'] = e.message
+            return jsonify(**response), 400
+        
+        request_data.update({
+            'queue_type': queue_type,
+            'queue_id': queue_id
+        })
+        try:
+            response = self.sq.clear_queue(**request_data)
         except Exception, e:
             response['message'] = e.message
             return jsonify(**response), 400
