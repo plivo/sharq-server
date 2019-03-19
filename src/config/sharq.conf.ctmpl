@@ -1,5 +1,5 @@
 [sharq]
-job_expire_interval  : 5000 ; in milliseconds
+job_expire_interval  : 45000 ; in milliseconds
 job_requeue_interval : 1000 ; in milliseconds
 default_job_requeue_limit : -1 ; retries infinitely
 
