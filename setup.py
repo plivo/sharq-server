@@ -26,6 +26,9 @@ setup(
         'gunicorn==19.0',
         'ujson==1.33'
     ],
+    dependency_links=[
+      'git+https://github.com/tushar-plivo/sharq.git@master#egg=sharq-0.4.0',
+    ],
     classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
