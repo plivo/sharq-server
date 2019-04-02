@@ -1,7 +1,7 @@
 Flask==1.0.2
 Jinja2==2.10
 MarkupSafe==1.1.1
-SharQ==0.3.0
+https://github.com/ppai-plivo/sharq/archive/ppai-fix-requeue-race.zip
 Werkzeug==0.15.1
 argparse==1.2.1
 gevent==1.4.0

@@ -56,7 +56,12 @@ class SharQServer(object):
         job_requeue_interval = float(
             self.config.get('sharq', 'job_requeue_interval'))
         while True:
-            self.sq.requeue()
+            try:
+                self.sq.requeue()
+            except Exception as err:
+                print err
+                # no logger in sharq server yet :/
+                pass
             gevent.sleep(job_requeue_interval / 1000.00)  # in seconds
 
     def _view_index(self):
