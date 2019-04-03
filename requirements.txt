@@ -1,7 +1,7 @@
 Flask==0.10.1
 Jinja2==2.7.2
 MarkupSafe==0.23
-SharQ==0.4.0
+git+https://github.com/bhuvanvenkat-plivo/sharq.git@feature-redis-cluster
 Werkzeug==0.9.4
 argparse==1.2.1
 gevent==1.0.1
@@ -9,6 +9,7 @@ greenlet==0.4.2
 gunicorn==19.0.0
 itsdangerous==0.24
 msgpack-python==0.4.2
-redis==2.10.1
+redis==2.10.6
+redis-py-cluster==1.3.6
 ujson==1.33
 wsgiref==0.1.2

@@ -12,7 +12,7 @@ accesslog            : /tmp/sharq.log ; optional
 [redis]
 db                   : 0
 key_prefix           : sharq_server
-conn_type            : tcp_sock ; or tcp_sock
+conn_type            : {{ printf "%s/%s/%s/config/redis/conn_type" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") }} ; or tcp_sock
 ;; unix connection settings
 ;; unix_socket_path     : /var/run/redis/redis.sock
 ;; tcp connection settings
