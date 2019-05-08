@@ -1,7 +1,7 @@
 [sharq]
 job_expire_interval  : 60000 ; in milliseconds
 job_requeue_interval : 5000 ; in milliseconds
-default_job_requeue_limit : 3 ; value of -1 retries infinitely
+default_job_requeue_limit : 0 ; value of -1 retries infinitely
 
 [sharq-server]
 host                 : 127.0.0.1
