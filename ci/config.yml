@@ -2,3 +2,11 @@ parent: common
 serviceName: sharq
 hipchatRoom: cicd-tests-dev-notifications
 language: python
+postDeployJobs:
+  dev:
+    - name: plivo/messaging-qa/prodSmokeNightly
+      parameters: [{$class: 'StringParameterValue', name: 'env', value: 'dev'}]
+      disabled: false
+  prod:
+    - name: plivo/messaging-qa/prodSmokeNightly
+      disabled: false 
