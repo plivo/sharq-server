@@ -60,8 +60,6 @@ class SharQServer(object):
                 self.sq.requeue()
             except Exception as err:
                 print err
-                # no logger in sharq server yet :/
-                pass
             gevent.sleep(job_requeue_interval / 1000.00)  # in seconds
 
     def _view_index(self):
@@ -75,7 +73,8 @@ class SharQServer(object):
         }
         try:
             request_data = json.loads(request.data)
-        except Exception, e:
+        except Exception as err:
+            print err
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -86,7 +85,8 @@ class SharQServer(object):
 
         try:
             response = self.sq.enqueue(**request_data)
-        except Exception, e:
+        except Exception as err:
+            print err
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -105,7 +105,8 @@ class SharQServer(object):
             response = self.sq.dequeue(**request_data)
             if response['status'] == 'failure':
                 return jsonify(**response), 404
-        except Exception, e:
+        except Exception as err:
+            print err
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -126,7 +127,8 @@ class SharQServer(object):
             response = self.sq.finish(**request_data)
             if response['status'] == 'failure':
                 return jsonify(**response), 404
-        except Exception, e:
+        except Exception as err:
+            print err
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -140,7 +142,8 @@ class SharQServer(object):
         try:
             request_data = json.loads(request.data)
             interval = request_data['interval']
-        except Exception, e:
+        except Exception as err:
+            print err
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -154,7 +157,8 @@ class SharQServer(object):
             response = self.sq.interval(**request_data)
             if response['status'] == 'failure':
                 return jsonify(**response), 404
-        except Exception, e:
+        except Exception as err:
+            print err
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -173,7 +177,8 @@ class SharQServer(object):
 
         try:
             response = self.sq.metrics(**request_data)
-        except Exception, e:
+        except Exception as err:
+            print err
             response['message'] = e.message
             return jsonify(**response), 400
 
