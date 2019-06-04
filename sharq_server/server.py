@@ -128,6 +128,12 @@ class SharQServer(object):
             response['message'] = e.message
             return jsonify(**response), 400
 
+        # trigger finish failure response for testing
+        response = {
+            'status': 'failure'
+        }
+        return jsonify(**response), 400
+
         return jsonify(**response)
 
     def _view_interval(self, queue_type, queue_id):
