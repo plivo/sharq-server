@@ -55,3 +55,5 @@ Dockerfile0
 Dockerfile1
 Dockerfile_supervisor
 test_sharq.py
+
+.DS_store
