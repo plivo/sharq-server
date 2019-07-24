@@ -57,3 +57,6 @@ Dockerfile_supervisor
 test_sharq.py
 
 .DS_store
+.idea/*
+venv/*
+
