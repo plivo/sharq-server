@@ -14,7 +14,6 @@ setup(
     packages=['sharq_server'],
     py_modules=['runner'],
     install_requires=[
-        'SharQ==0.5.1',
         'Flask==0.10.1',
         'Jinja2==2.7.2',
         'MarkupSafe==0.23',

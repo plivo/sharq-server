@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y nginx && pip install virtualenv envtpl
 RUN curl -L https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.tgz | tar -C /usr/sbin -xzf -
 RUN virtualenv /opt/sharq-server
 RUN . /opt/sharq-server/bin/activate && /opt/sharq-server/bin/pip install --no-cache-dir -r /opt/sharq-server/requirements.txt && /opt/sharq-server/bin/python setup.py install -f && /opt/sharq-server/bin/pip install uwsgi
+RUN /opt/sharq-server/bin/pip install https://sharq-dist.s3.amazonaws.com/SharQ-0.5.2.tar.gz
 
 ADD src/config /etc/sharq-server/config
 ADD src/config/nginx.conf /etc/nginx/nginx.conf

@@ -19,4 +19,4 @@ conn_type            : tcp_sock ; or tcp_sock
 
 port                 : {{ printf "%s/%s/%s/config/redis/port" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") | key | parseInt }}
 host                 : {{ printf "%s/%s/%s/config/redis/host" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") | key }}
-clustered                 : {{ printf "%s/%s/%s/config/redis/clustered" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") | key }}
+clustered            : {{ printf "%s/%s/%s/config/redis/clustered" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") | key }}
