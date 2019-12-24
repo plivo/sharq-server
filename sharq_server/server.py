@@ -185,7 +185,7 @@ class SharQServer(object):
         self.sq.ping()
 
     def _view_clear_queue(self, queue_type, queue_id):
-        """remove queueu from SharQ based on the queue_type and queue_id."""
+        """remove queue from SharQ based on the queue_type and queue_id."""
         response = {
             'status': 'failure'
         }
