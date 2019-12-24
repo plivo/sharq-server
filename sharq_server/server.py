@@ -55,7 +55,7 @@ class SharQServer(object):
             view_func=self._view_clear_queue, methods=['DELETE'])
         self.app.add_url_rule(
             '/deepstatus/',
-            view_func=self._view_deep_status(), methods=['GET'])
+            view_func=self._view_deep_status, methods=['GET'])
 
     def requeue(self):
         """Loop endlessly and requeue expired jobs."""
