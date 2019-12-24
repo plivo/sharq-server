@@ -181,8 +181,11 @@ class SharQServer(object):
         return jsonify(**response)
 
     def _view_deep_status(self):
-        print "Deep status check"  # TODO remove this
-        self.sq.ping()
+        """Checks  underlying data store health"""
+        response = {
+            'status': self.sq.ping()
+        }
+        return jsonify(**response)
 
     def _view_clear_queue(self, queue_type, queue_id):
         """remove queue from SharQ based on the queue_type and queue_id."""
