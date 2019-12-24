@@ -182,8 +182,9 @@ class SharQServer(object):
 
     def _view_deep_status(self):
         """Checks  underlying data store health"""
+        self.sq.ping()
         response = {
-            'status': self.sq.ping()
+            'status': "success"
         }
         return jsonify(**response)
 
