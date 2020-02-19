@@ -10,3 +10,4 @@ itsdangerous==0.24
 msgpack-python==0.4.2
 ujson==1.33
 wsgiref==0.1.2
+SharQ==0.5.2
