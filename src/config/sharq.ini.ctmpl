@@ -36,3 +36,4 @@ gevent = 1024
 
 # configure sharq config path
 env = SHARQ_CONFIG=/etc/sharq-server/config/sharq.conf
+log-format = {"client_addr":"%(addr)","request_method":"%(method)","request_uri":"%(uri)","response_size":%(rsize),"response_time":%(msecs),"status":%(status),"protocol":"%(proto)","timestamp":%(time),"level":"info"}
