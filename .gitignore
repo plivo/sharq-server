@@ -57,3 +57,4 @@ Dockerfile_supervisor
 test_sharq.py
 .idea/*
 venv/*
+.vscode/

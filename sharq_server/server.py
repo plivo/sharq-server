@@ -53,6 +53,9 @@ class SharQServer(object):
         self.app.add_url_rule(
             '/deletequeue/<queue_type>/<queue_id>/',
             view_func=self._view_clear_queue, methods=['DELETE'])
+        self.app.add_url_rule(
+            '/deepstatus/',
+            view_func=self._view_deep_status, methods=['GET'])
 
     def requeue(self):
         """Loop endlessly and requeue expired jobs."""
@@ -104,6 +107,10 @@ class SharQServer(object):
             if response['status'] == 'failure':
                 return jsonify(**response), 404
         except Exception, e:
+            print e
+            import traceback
+            for line in traceback.format_exc().splitlines():
+                print line
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -176,9 +183,17 @@ class SharQServer(object):
             return jsonify(**response), 400
 
         return jsonify(**response)
-    
+
+    def _view_deep_status(self):
+        """Checks  underlying data store health"""
+        self.sq.ping()
+        response = {
+            'status': "success"
+        }
+        return jsonify(**response)
+
     def _view_clear_queue(self, queue_type, queue_id):
-        """remove queueu from SharQ based on the queue_type and queue_id."""
+        """remove queue from SharQ based on the queue_type and queue_id."""
         response = {
             'status': 'failure'
         }
