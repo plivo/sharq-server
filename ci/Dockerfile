@@ -10,7 +10,7 @@ RUN mkdir /etc/supervisord && mkdir /etc/supervisord/conf.d && mkdir /var/log/su
 RUN apt-get update && apt-get install -y nginx && pip install virtualenv envtpl
 
 RUN virtualenv /opt/sharq-server
-RUN . /opt/sharq-server/bin/activate && /opt/sharq-server/bin/pip install --no-cache-dir -r /opt/sharq-server/requirements.txt && /opt/sharq-server/bin/python setup.py install -f && /opt/sharq-server/bin/pip install uwsgi && /opt/sharq-server/bin/pip install ujson==2.0.0 --no-binary
+RUN . /opt/sharq-server/bin/activate && /opt/sharq-server/bin/pip install --no-cache-dir -r /opt/sharq-server/requirements.txt && /opt/sharq-server/bin/pip install ujson==2.0.0 --no-binary && /opt/sharq-server/bin/python setup.py install -f && /opt/sharq-server/bin/pip install uwsgi
 
 ADD src/config /etc/sharq-server/config
 ADD src/config/nginx.conf /etc/nginx/nginx.conf
