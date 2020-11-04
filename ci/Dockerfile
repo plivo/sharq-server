@@ -1,5 +1,5 @@
-#FROM python:3.7.9-alpine3.12
-FROM 857556598075.dkr.ecr.us-west-1.amazonaws.com/plivo/app/base/python:3.6-slim-buster-2e707e6
+FROM python:3.6-slim-buster
+#FROM 857556598075.dkr.ecr.us-west-1.amazonaws.com/plivo/app/base/python:3.6-slim-buster-2e707e6
 
 USER root
 
@@ -7,10 +7,10 @@ RUN mkdir -p /opt/sharq-server
 WORKDIR /opt/sharq-server
 COPY . /opt/sharq-server
 RUN mkdir /etc/supervisord && mkdir /etc/supervisord/conf.d && mkdir /var/log/supervisord && pip install supervisor
-RUN apt-get update && apt-get install -y nginx && pip install virtualenv envtpl
+RUN apt-get update && apt-get install -y nginx g++ && pip install virtualenv envtpl
 
 RUN virtualenv /opt/sharq-server
-RUN . /opt/sharq-server/bin/activate && /opt/sharq-server/bin/pip install --no-cache-dir -r /opt/sharq-server/requirements.txt && /opt/sharq-server/bin/pip install ujson==2.0.0 --no-use-pep517 && /opt/sharq-server/bin/python setup.py install -f && /opt/sharq-server/bin/pip install uwsgi
+RUN . /opt/sharq-server/bin/activate && /opt/sharq-server/bin/pip install --no-cache-dir -r /opt/sharq-server/requirements.txt && /opt/sharq-server/bin/pip install ujson==2.0.0 --no-use-pep517 --no-binary :all: && /opt/sharq-server/bin/python setup.py install -f && /opt/sharq-server/bin/pip install uwsgi
 
 ADD src/config /etc/sharq-server/config
 ADD src/config/nginx.conf /etc/nginx/nginx.conf
