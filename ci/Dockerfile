@@ -1,5 +1,5 @@
 #FROM python:3.7.9-alpine3.12
-FROM 857556598075.dkr.ecr.us-west-1.amazonaws.com/plivo/app/base/python:3.7.7-alpine3.11-2e707e6
+FROM 857556598075.dkr.ecr.us-west-1.amazonaws.com/plivo/app/base/python:3.6-slim-buster-2e707e6
 
 USER root
 
