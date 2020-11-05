@@ -7,7 +7,7 @@ RUN mkdir -p /opt/sharq-server
 WORKDIR /opt/sharq-server
 COPY . /opt/sharq-server
 RUN mkdir /etc/supervisord && mkdir /etc/supervisord/conf.d && mkdir /var/log/supervisord && pip install supervisor
-RUN apt-get update && apt-get install -y nginx g++ && pip install virtualenv envtpl
+RUN apt-get update && apt-get install -y nginx g++ git && pip install virtualenv envtpl
 
 RUN virtualenv /opt/sharq-server
 RUN . /opt/sharq-server/bin/activate && /opt/sharq-server/bin/pip install --no-cache-dir -r /opt/sharq-server/requirements.txt && /opt/sharq-server/bin/python setup.py install -f && /opt/sharq-server/bin/pip install uwsgi
