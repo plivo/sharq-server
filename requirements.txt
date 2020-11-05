@@ -10,3 +10,4 @@ itsdangerous==0.24
 msgpack-python==0.4.2
 ujson==2.0.0
 git+https://github.com/plivo/sharq@py2to3
+uWSGI==2.0.15
