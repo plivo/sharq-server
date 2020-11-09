@@ -104,14 +104,16 @@ class SharQServer(object):
         }
         try:
             response = self.sq.dequeue(**request_data)
+            print("sharqvarshit::", response)
             if response['status'] == 'failure':
                 return jsonify(**response), 404
         except Exception as e:
-            print(e)
+            print("sharqvarshit::", e)
             import traceback
             for line in traceback.format_exc().splitlines():
                 print(line)
             response['message'] = e.message
+            print("sharqvarshit::", response)
             return jsonify(**response), 400
 
         return jsonify(**response)
