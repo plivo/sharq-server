@@ -106,7 +106,7 @@ class SharQServer(object):
             response = self.sq.dequeue(**request_data)
             print("sharqvarshit::dequeueresponse", response)
             try:
-                print("sharqvarshit::jsonify", response)
+                print("sharqvarshit::jsonify", jsonify(**response))
             except Exception as e:
                 print("sharqvarshit::jsonifyexception", e)
             if response['status'] == 'failure':
