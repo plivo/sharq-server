@@ -3,11 +3,11 @@ Jinja2==2.7.2
 MarkupSafe==0.23
 Werkzeug==0.9.4
 argparse==1.2.1
-gevent==1.0.1
-greenlet==0.4.2
+gevent==20.5.0
+greenlet==0.4.15
 gunicorn==19.0.0
 itsdangerous==0.24
-msgpack-python==0.4.2
-ujson==1.33
-wsgiref==0.1.2
-git+https://github.com/plivo/sharq.git@redis-cluster-upgrade
+msgpack==0.5.6
+ujson==2.0.0
+git+https://github.com/plivo/sharq@py2to3
+uWSGI==2.0.19.1
