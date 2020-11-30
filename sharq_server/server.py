@@ -62,7 +62,10 @@ class SharQServer(object):
         job_requeue_interval = float(
             self.config.get('sharq', 'job_requeue_interval'))
         while True:
-            self.sq.requeue()
+            try:
+                self.sq.requeue()
+            except Exception as e:
+                traceback.print_exc()
             gevent.sleep(job_requeue_interval / 1000.00)  # in seconds
 
     def _view_index(self):
@@ -88,6 +91,7 @@ class SharQServer(object):
         try:
             response = self.sq.enqueue(**request_data)
         except Exception as e:
+            traceback.print_exc()
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -131,6 +135,7 @@ class SharQServer(object):
             if response['status'] == 'failure':
                 return jsonify(**response), 404
         except Exception as e:
+            traceback.print_exc()
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -159,6 +164,7 @@ class SharQServer(object):
             if response['status'] == 'failure':
                 return jsonify(**response), 404
         except Exception as e:
+            traceback.print_exc()
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -178,6 +184,7 @@ class SharQServer(object):
         try:
             response = self.sq.metrics(**request_data)
         except Exception as e:
+            traceback.print_exc()
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -217,6 +224,7 @@ class SharQServer(object):
         try:
             response = self.sq.clear_queue(**request_data)
         except Exception as e:
+            traceback.print_exc()
             response['message'] = e.message
             return jsonify(**response), 400
 

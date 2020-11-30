@@ -9,5 +9,5 @@ gunicorn==19.0.0
 itsdangerous==0.24
 msgpack==0.5.6
 ujson==2.0.0
-SharQ==1.0.0
 uWSGI==2.0.19.1
+https://github.com/ppai-plivo/sharq/archive/sharq-requeue-take2.zip
