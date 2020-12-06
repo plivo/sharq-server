@@ -9,5 +9,5 @@ gunicorn==19.0.0
 itsdangerous==0.24
 msgpack==0.5.6
 ujson==2.0.0
-git+https://github.com/plivo/sharq@py2to3
+git+https://github.com/plivo/sharq@master
 uWSGI==2.0.19.1
