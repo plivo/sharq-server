@@ -18,11 +18,12 @@ setup(
         'Jinja2==2.7.2',
         'MarkupSafe==0.23',
         'Werkzeug==0.9.4',
-        'gevent==20.5.0',
-        'greenlet==0.4.15',
+        'gevent==1.0.1',
+        'greenlet==0.4.2',
         'itsdangerous==0.24',
+        'wsgiref==0.1.2',
         'gunicorn==19.0',
-        'ujson==2.0.0'
+        'ujson==1.33'
     ],
     classifiers = [
         'Development Status :: 5 - Production/Stable',
