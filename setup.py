@@ -17,7 +17,7 @@ setup(
         'Flask==0.10.1',
         'Jinja2==2.7.2',
         'MarkupSafe==0.23',
-        'Werkzeug==0.9.4',
+        'Werkzeug==0.15.3',
         'gevent==1.0.1',
         'greenlet==0.4.2',
         'itsdangerous==0.24',
