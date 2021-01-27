@@ -21,7 +21,7 @@ setup(
         'gevent==20.5.0',
         'greenlet==0.4.15',
         'itsdangerous==0.24',
-        'gunicorn==19.0',
+        'gunicorn==19.5.0',
         'ujson==2.0.0'
     ],
     classifiers = [
