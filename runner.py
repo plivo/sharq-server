@@ -3,7 +3,7 @@
 import os
 import argparse
 import multiprocessing
-import ConfigParser
+import configparser
 
 import gunicorn.app.base
 from gunicorn.six import iteritems
@@ -49,7 +49,7 @@ def run():
     args = parser.parse_args()
 
     # read the configuration file and set gunicorn options.
-    config_parser = ConfigParser.SafeConfigParser()
+    config_parser = configparser.SafeConfigParser()
     # get the full path of the config file.
     sharq_config  = os.path.abspath(args.sharq_config)
     config_parser.read(sharq_config)
@@ -59,12 +59,12 @@ def run():
     bind = '%s:%s' % (host, port)
     try:
         workers = config_parser.get('sharq-server', 'workers')
-    except ConfigParser.NoOptionError:
+    except configparser.NoOptionError:
         workers = number_of_workers()
 
     try:
         accesslog = config_parser.get('sharq-server', 'accesslog')
-    except ConfigParser.NoOptionError:
+    except configparser.NoOptionError:
         accesslog = None
 
     options = {
@@ -83,7 +83,7 @@ def run():
             'config': gunicorn_config
         })
 
-    print """
+    print("""
       ___ _              ___    ___
      / __| |_  __ _ _ _ / _ \  / __| ___ _ ___ _____ _ _
      \__ \ ' \/ _` | '_| (_) | \__ \/ -_) '_\ V / -_) '_|
@@ -92,6 +92,6 @@ def run():
     Version: %s
 
     Listening on: %s
-    """ % (__version__, bind)
+    """ % (__version__, bind))
     server = setup_server(sharq_config)
     SharQServerApplicationRunner(server.app, options).run()
