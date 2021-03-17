@@ -5,6 +5,7 @@ import gevent
 import configparser
 import ujson as json
 from flask import Flask, request, jsonify
+from redis.exceptions import LockError
 
 from sharq import SharQ
 
@@ -67,6 +68,23 @@ class SharQServer(object):
             except Exception as e:
                 traceback.print_exc()
             gevent.sleep(job_requeue_interval / 1000.00)  # in seconds
+
+    def requeue_with_lock(self):
+        """Loop endlessly and requeue expired jobs, but with a distributed lock"""
+        job_requeue_interval = float(
+            self.config.get('sharq', 'job_requeue_interval'))
+        while True:
+            try:
+                with self.sq.redis_client().lock('sharq-requeue-lock-key', timeout=15):
+                    try:
+                        self.sq.requeue()
+                    except Exception as e:
+                        traceback.print_exc()
+            except LockError:
+                # the lock wasn't acquired within specified time
+                pass
+            finally:
+                gevent.sleep(job_requeue_interval / 1000.00)  # in seconds
 
     def _view_index(self):
         """Greetings at the index."""
@@ -237,6 +255,6 @@ def setup_server(config_path):
     # configure the SharQ server
     server = SharQServer(config_path)
     # start the requeue loop
-    gevent.spawn(server.requeue)
+    gevent.spawn(server.requeue_with_lock)
 
     return server
