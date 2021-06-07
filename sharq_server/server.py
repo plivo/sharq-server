@@ -71,8 +71,15 @@ class SharQServer(object):
 
     def requeue_with_lock(self):
         """Loop endlessly and requeue expired jobs, but with a distributed lock"""
+        enable_requeue_script = self.config.get('sharq', 'enable_requeue_script')
+        if enable_requeue_script == "false":
+            print("requeue script disabled")
+            return
+
         job_requeue_interval = float(
             self.config.get('sharq', 'job_requeue_interval'))
+
+        print("start requeue loop: job_requeue_interval = %f" % (job_requeue_interval))
         while True:
             try:
                 with self.sq.redis_client().lock('sharq-requeue-lock-key', timeout=15):

@@ -7,6 +7,7 @@
 job_expire_interval : {{ parseInt (keyOrDefault (printf "%s/%s/%s/%s/config/sharq/job_requeue_interval" $team $appenv $sharq_type $region) "120000" ) }}
 job_requeue_interval : {{ parseInt (keyOrDefault (printf "%s/%s/%s/%s/config/sharq/job_requeue_interval" $team $appenv $sharq_type $region) "3000" ) }}
 default_job_requeue_limit : {{ parseInt (keyOrDefault (printf "%s/%s/%s/%s/config/sharq/default_job_requeue_limit" $team $appenv $sharq_type $region) "0" ) }}
+enable_requeue_script : {{ parseBool (keyOrDefault (printf "%s/%s/%s/%s/config/sharq/enable_requeue_script" $team $appenv $sharq_type $region) "false" ) }}
 
 [sharq-server]
 host                 : 127.0.0.1
