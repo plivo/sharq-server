@@ -10,4 +10,4 @@ itsdangerous==0.24
 msgpack==0.5.6
 ujson==2.0.0
 uWSGI==2.0.19.1
-SharQ==1.1.0
+git+https://github.com/plivo/sharq@redis-labs
