@@ -6,6 +6,7 @@ import configparser
 import ujson as json
 from flask import Flask, request, jsonify
 from redis.exceptions import LockError
+import traceback
 
 from sharq import SharQ
 
