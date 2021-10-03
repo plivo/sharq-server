@@ -21,3 +21,4 @@ conn_type            : tcp_sock
 port                 : {{ printf "%s/%s/%s/%s/config/redis/port" $team $appenv $sharq_type $region | key | parseInt }}
 host                 : {{ printf "%s/%s/%s/%s/config/redis/host" $team $appenv $sharq_type $region | key }}
 clustered            : {{ printf "%s/%s/%s/%s/config/redis/clustered" $team $appenv $sharq_type $region | key }}
+password             : {{ printf "%s/%s/%s/%s/config/redis/password" $team $appenv $sharq_type $region | key }}
