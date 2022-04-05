@@ -34,6 +34,23 @@ $curl http://127.0.0.1:8080/
 }
 ```
 
+## Development
+
+### With Docker & Docker Compose
+
+> Pre-requisites: Install latest stable versions of Docker and Docker Compose.
+
+1. Clone the repository locally.
+2. From repository root, run:
+
+```bash
+make start
+```
+
+3. Sharq server will be up and running at `http://localhost:8000`.
+
+> Note: Try out `/status/` & `/deepstatus/` (checks connectivity with Redis) endpoints.
+
 ## Documentation
 
 Check out [sharq.io](http://sharq.io) for documentation.

@@ -219,7 +219,6 @@ class SharQServer(object):
     def _view_deep_status(self):
         """Checks  underlying data store health"""
         try:
-
             self.sq.deep_status()
             response = {
                 'status': "success"
