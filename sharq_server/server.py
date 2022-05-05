@@ -4,7 +4,8 @@ import os
 import gevent
 import configparser
 import ujson as json
-from flask import Flask, request, jsonify
+# from flask import Flask, request, jsonify
+from quart import Quart, request, jsonify
 from redis.exceptions import LockError
 import traceback
 
@@ -24,7 +25,7 @@ class SharQServer(object):
         # pass the config file to configure the SharQ core.
         self.sq = SharQ(config_path)
 
-        self.app = Flask(__name__)
+        self.app = Quart(__name__)
         # set the routes
         self.app.add_url_rule(
             '/', view_func=self._view_index, methods=['GET'])
