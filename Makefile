@@ -30,4 +30,4 @@ docker-run:
 	docker run -p 8000:8000 sharq
 
 start:
-	docker-compose up
+	docker-compose up --build

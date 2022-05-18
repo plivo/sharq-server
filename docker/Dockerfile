@@ -1,22 +1,33 @@
 FROM python:3.7-slim-buster
 
-RUN mkdir -p /opt/sharq-server
-WORKDIR /opt/sharq-server
-COPY . /opt/sharq-server
-RUN mkdir /etc/supervisord && mkdir /etc/supervisord/conf.d && mkdir /var/log/supervisord && pip install supervisor
-RUN apt-get update && apt-get install -y make nginx g++ git && pip install virtualenv envtpl
+# Install Nginx
+# Ref: https://github.com/tiangolo/uwsgi-nginx-docker/blob/master/docker-images/install-nginx-debian.sh
+COPY scripts/install-nginx-debian.sh /
+RUN bash /install-nginx-debian.sh
 
-RUN virtualenv /opt/sharq-server
-RUN . /opt/sharq-server/bin/activate && /opt/sharq-server/bin/pip install --no-cache-dir -r /opt/sharq-server/requirements.txt && /opt/sharq-server/bin/python setup.py install -f
+# Remove default configuration from Nginx
+RUN rm /etc/nginx/conf.d/default.conf
 
-ADD docker/config /etc/sharq-server/config
-ADD docker/config/nginx.conf /etc/nginx/nginx.conf
-ADD docker/config/nginx-sharq.conf /etc/nginx/conf.d/sharq.conf
-ADD docker/config/sharq-server-basicauth /etc/nginx/conf.d/sharq-server-basicauth
+# Install C Compiler and Supervisord
+RUN apt-get update && apt-get install -y build-essential supervisor \
+&& rm -rf /var/lib/apt/lists/*
 
-COPY docker/config/sharq.conf /etc/sharq-server/config/sharq.conf
-COPY docker/config/sharq.ini /etc/sharq-server/config/sharq.ini
+# Install Python requirements
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Copy configurations to the container
+WORKDIR /app
 COPY docker/config/supervisord.conf /etc/supervisord.conf
-RUN mkdir /var/run/sharq/
+COPY docker/config/nginx.conf /etc/nginx/nginx.conf
+COPY docker/config/nginx-sharq.conf /etc/nginx/conf.d/sharq.conf
+COPY docker/config/sharq-server-basicauth /etc/nginx/conf.d/sharq-server-basicauth
+COPY docker/config /app/config 
 
-ENTRYPOINT [ "supervisord", "-c", "/etc/supervisord.conf" ]
+# Copy application code to the container
+COPY sharq_server /app/sharq_server
+
+# Start supervisord with Nginx and uvicorn
+COPY scripts/start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+CMD ["/app/start.sh"]

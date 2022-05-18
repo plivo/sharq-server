@@ -3,15 +3,15 @@ version: '3'
 services:
   sharq:
     build:
-      context: ./
+      context: .
       dockerfile: docker/Dockerfile
-    # volumes:
-    #   - .:/usr/src/app
+    environment:
+      - LOG_LEVEL=warning
+      - ACCESS_LOG=
     ports:
-      - 8000:8000
+      - 8000:80
     depends_on:
       - redis
-
   redis:
     image: redis:5.0
     ports:

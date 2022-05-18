@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2014 Plivo Team. See LICENSE.txt for details.
 import os
+
+from setuptools import setup
 import gevent
 import configparser
 import ujson as json
-# from flask import Flask, request, jsonify
 from quart import Quart, request, jsonify
 from redis.exceptions import LockError
 import traceback
