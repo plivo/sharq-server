@@ -8,6 +8,6 @@ greenlet==0.4.15
 gunicorn==19.0.0
 itsdangerous==0.24
 msgpack==0.5.6
-ujson==2.0.0
+ujson==5.2.0
 uWSGI==2.0.19.1
 SharQ==1.2.0
