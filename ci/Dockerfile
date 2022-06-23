@@ -1,5 +1,7 @@
 FROM python:3.7-slim-buster
 
+ENV CONSUL_TEMPLATE_VERSION 0.19.5
+
 # Install Nginx
 # Ref: https://github.com/tiangolo/uwsgi-nginx-docker/blob/master/docker-images/install-nginx-debian.sh
 COPY scripts/install-nginx-debian.sh /
@@ -8,9 +10,14 @@ RUN bash /install-nginx-debian.sh
 # Remove default configuration from Nginx
 RUN rm /etc/nginx/conf.d/default.conf
 
-# Install Supervisord
-RUN apt-get update && apt-get install -y supervisor \
-&& rm -rf /var/lib/apt/lists/*
+# Install depedencies like supervisord, curl, etc.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential git supervisor curl python3-dev \
+    && apt-get purge -y --auto-remove \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install consul-template
+RUN curl -L https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.tgz | tar -C /usr/sbin -xzf -
 
 # Install Python requirements
 COPY requirements.txt /tmp/requirements.txt
