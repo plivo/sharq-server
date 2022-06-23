@@ -28,6 +28,6 @@ COPY config /app/config
 COPY sharq_server /app/sharq_server
 
 # Start supervisord with Nginx and uvicorn
-COPY scripts/start.sh /app/start.sh
-RUN chmod +x /app/start.sh
-CMD ["/app/start.sh"]
+COPY ci/entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+CMD ["/app/entrypoint.sh"]

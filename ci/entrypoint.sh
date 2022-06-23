@@ -21,4 +21,5 @@ echo "
 
 echo "All templates are rendered. Starting sharq-server..."
 
-supervisord -c /etc/supervisord.conf
+# Start Supervisor, with Nginx and sharq-server
+exec /usr/bin/supervisord -n -c /etc/supervisord.conf
