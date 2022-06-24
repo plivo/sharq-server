@@ -2,10 +2,8 @@
 # Copyright (c) 2014 Plivo Team. See LICENSE.txt for details.
 import os
 
-from setuptools import setup
 import gevent
 import configparser
-import ujson as json
 from quart import Quart, request, jsonify
 from redis.exceptions import LockError
 import traceback
@@ -100,13 +98,13 @@ class SharQServer(object):
         """Greetings at the index."""
         return jsonify(**{'message': 'Hello, SharQ!'})
 
-    def _view_enqueue(self, queue_type, queue_id):
+    async def _view_enqueue(self, queue_type, queue_id):
         """Enqueues a job into SharQ."""
         response = {
             'status': 'failure'
         }
         try:
-            request_data = json.loads(request.data)
+            request_data = await request.get_json()
         except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
@@ -169,13 +167,13 @@ class SharQServer(object):
 
         return jsonify(**response)
 
-    def _view_interval(self, queue_type, queue_id):
+    async def _view_interval(self, queue_type, queue_id):
         """Updates the queue interval in SharQ."""
         response = {
             'status': 'failure'
         }
         try:
-            request_data = json.loads(request.data)
+            request_data = await request.get_json()
             interval = request_data['interval']
         except Exception as e:
             response['message'] = e.message
@@ -233,13 +231,13 @@ class SharQServer(object):
                 print(line)
             raise Exception
 
-    def _view_clear_queue(self, queue_type, queue_id):
+    async def _view_clear_queue(self, queue_type, queue_id):
         """remove queue from SharQ based on the queue_type and queue_id."""
         response = {
             'status': 'failure'
         }
         try:
-            request_data = json.loads(request.data)
+            request_data = await request.get_json()
         except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
