@@ -4,7 +4,7 @@ services:
   sharq-server:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: Dockerfile  # Use ci/Dockerfile to test CI build
     image: sharq-server
     container_name: sharq-server
     environment:

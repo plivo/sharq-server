@@ -25,11 +25,11 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Copy configurations to the container
 WORKDIR /app
-COPY config/supervisord.conf /etc/supervisord.conf
-COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY config/nginx-sharq.conf /etc/nginx/conf.d/sharq.conf
+COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY config/sharq-server-basicauth /etc/nginx/conf.d/sharq-server-basicauth
-COPY config /app/config 
+COPY config/sharq.conf.ctmpl /app/config/
+COPY config/supervisord.conf /etc/supervisord.conf
 
 # Copy application code to the container
 COPY sharq_server /app/sharq_server
