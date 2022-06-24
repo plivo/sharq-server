@@ -30,4 +30,5 @@ docker-run:
 	docker run -p 8000:8000 sharq
 
 start:
-	docker-compose up --build
+	docker-compose up start-dependencies
+	docker-compose up --build --remove-orphans
