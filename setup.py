@@ -14,15 +14,15 @@ setup(
     packages=['sharq_server'],
     py_modules=['runner'],
     install_requires=[
-        'Flask==0.10.1',
         'Jinja2==2.7.2',
         'MarkupSafe==0.23',
-        'Werkzeug==0.9.4',
         'gevent==20.5.0',
         'greenlet==0.4.15',
         'itsdangerous==0.24',
         'gunicorn==19.0',
-        'ujson==2.0.0'
+        'ujson==2.0.3',
+        'quart==0.17.0',
+        'uvicorn==0.17.6'
     ],
     classifiers = [
         'Development Status :: 5 - Production/Stable',

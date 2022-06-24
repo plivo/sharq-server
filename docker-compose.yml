@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  sharq-server:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Use ci/Dockerfile to test CI build
+    image: sharq-server
+    container_name: sharq-server
+    environment:
+      - LOG_LEVEL=warning
+      - ACCESS_LOG=
+      # Uncomment following to test build with ci/Dockerfile
+      # - CONSUL=https://consul.non-prod.plivops.com
+      # - REGION=us-east-1
+      # - ENVIRONMENT=dev
+      # - TEAM=sms
+      # - SHARQ_TYPE=sharq-clustered
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis-clustered
+
+  redis-clustered:
+    image: grokzen/redis-cluster:5.0.4
+    ports:
+      - '7000-7005:7000-7005'
+    environment:
+      - IP=0.0.0.0
+    logging:
+      driver: none
+  
+  start-dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - redis-clustered
+    command: redis-clustered:7000 redis-clustered:7001 redis-clustered:7002 redis-clustered:7003 redis-clustered:7004 redis-clustered:7005
