@@ -8,9 +8,11 @@ RUN bash /install-nginx-debian.sh
 # Remove default configuration from Nginx
 RUN rm /etc/nginx/conf.d/default.conf
 
-# Install C Compiler and Supervisord
-RUN apt-get update && apt-get install -y build-essential supervisor \
-&& rm -rf /var/lib/apt/lists/*
+# Install depedencies like supervisord, curl, etc.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential git supervisor curl python3-dev \
+    && apt-get purge -y --auto-remove \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Python requirements
 COPY requirements.txt /tmp/requirements.txt
