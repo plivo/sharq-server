@@ -22,7 +22,7 @@ setup(
         'greenlet==0.4.15',
         'itsdangerous==0.24',
         'gunicorn==19.0',
-        'ujson==2.0.0'
+        'ujson==5.4.0'
     ],
     classifiers = [
         'Development Status :: 5 - Production/Stable',
