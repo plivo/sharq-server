@@ -3,6 +3,6 @@
 @Library('plivo_standard_libs@production') _
 
 deliveryPipeline ([
-	buildContainer: ,
+	buildContainer: '' ,
 	disableQAStages: true
 ])
