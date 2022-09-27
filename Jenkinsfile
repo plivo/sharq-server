@@ -3,6 +3,6 @@
 @Library('plivo_standard_libs@production') _
 
 deliveryPipeline ([
-	buildContainer: '',
+	buildContainer: 'plivo/jenkins-ci/python:xenialplivocomm-2.7.15',
 	disableQAStages: true
 ])
