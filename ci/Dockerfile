@@ -5,7 +5,7 @@ RUN mkdir -p /opt/sharq-server
 WORKDIR /opt/sharq-server
 COPY . /opt/sharq-server
 RUN mkdir /etc/supervisord && mkdir /etc/supervisord/conf.d && mkdir /var/log/supervisord && pip install supervisor
-RUN apt-get update && apt-get install -y nginx && pip install virtualenv envtpl
+RUN apt-get update && apt-get install -y nginx && pip install virtualenv
 
 RUN curl -L https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.tgz | tar -C /usr/sbin -xzf -
 RUN virtualenv /opt/sharq-server
