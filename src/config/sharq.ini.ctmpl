@@ -23,9 +23,9 @@ chmod-socket = 666
 {{$loggingKeyName := printf "%s/%s/%s/%s/config/logging/disable" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") (env "REGION")}}
 {{ if key $loggingKeyName | parseBool }}
 disable-logging=True
-log-4xx = false
 {{ end }}
 
+log-4xx = False
 
 # daemonize
 #daemonize=False
