@@ -31,8 +31,6 @@ disable-logging = true
 #daemonize=False
 
 # sharq related
-chdir = /opt/sharq-server
-virtualenv = /opt/sharq-server
 module = wsgi:app
 gevent = 1024
 
