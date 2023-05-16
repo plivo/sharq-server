@@ -266,3 +266,4 @@ def setup_server(config_path):
     gevent.spawn(server.requeue_with_lock)
 
     return server
+

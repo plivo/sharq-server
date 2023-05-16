@@ -1,5 +1,4 @@
-FROM python:3.6-slim-buster
-
+FROM 857556598075.dkr.ecr.us-west-1.amazonaws.com/plivo/app/base/python:3.6-slim-buster-1ece250
 ENV CONSUL_TEMPLATE_VERSION 0.19.5
 
 
