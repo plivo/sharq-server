@@ -2,3 +2,5 @@ parent: common
 serviceName: sharq
 hipchatRoom: cicd-tests-dev-notifications
 language: python
+build:
+  platform: "linux/amd64,linux/arm64"
