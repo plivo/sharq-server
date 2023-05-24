@@ -1,6 +1,4 @@
-FROM python:3.11-alpine3.17
-
-ENV CONSUL_TEMPLATE_VERSION 0.19.5
+FROM python:3.11-slim-buster
 
 RUN mkdir -p /opt/sharq-server
 WORKDIR /opt/sharq-server
