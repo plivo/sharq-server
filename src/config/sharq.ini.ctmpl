@@ -25,9 +25,7 @@ chmod-socket = 666
 disable-logging=True
 {{ end }}
 
-disable-logging = False
-log-2xx = True
-log-5xx = True
+disable-logging = True
 
 # daemonize
 #daemonize=False
