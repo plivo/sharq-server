@@ -26,6 +26,8 @@ disable-logging=True
 {{ end }}
 
 disable-logging = False
+log-2xx = True
+log-5xx = True
 
 # daemonize
 #daemonize=False
