@@ -4,7 +4,7 @@ RUN mkdir -p /opt/sharq-server
 WORKDIR /opt/sharq-server
 COPY . /opt/sharq-server
 RUN mkdir /etc/supervisord && mkdir /etc/supervisord/conf.d && mkdir /var/log/supervisord && pip install supervisor
-RUN apk update && apk add linux-headers nginx g++ git curl && pip install virtualenv envtpl
+RUN apk update && apk add libffi-dev linux-headers nginx g++ git curl && pip install virtualenv envtpl
 
 RUN virtualenv /opt/sharq-server
 RUN . /opt/sharq-server/bin/activate && /opt/sharq-server/bin/pip install --no-cache-dir -r /opt/sharq-server/requirements.txt && /opt/sharq-server/bin/python setup.py install -f
