@@ -1,15 +1,11 @@
-FROM python:3.6-slim-buster
-
-ENV CONSUL_TEMPLATE_VERSION 0.19.5
-
+FROM python:3.11-alpine3.17
 
 RUN mkdir -p /opt/sharq-server
 WORKDIR /opt/sharq-server
 COPY . /opt/sharq-server
 RUN mkdir /etc/supervisord && mkdir /etc/supervisord/conf.d && mkdir /var/log/supervisord && pip install supervisor
-RUN apt-get update && apt-get install -y nginx g++ git curl && pip install virtualenv envtpl
+RUN apk update && apk add libffi-dev linux-headers nginx g++ git curl && pip install virtualenv envtpl
 
-RUN curl -L https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.tgz | tar -C /usr/sbin -xzf -
 RUN virtualenv /opt/sharq-server
 RUN . /opt/sharq-server/bin/activate && /opt/sharq-server/bin/pip install --no-cache-dir -r /opt/sharq-server/requirements.txt && /opt/sharq-server/bin/python setup.py install -f
 
