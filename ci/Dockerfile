@@ -1,4 +1,4 @@
-FROM 857556598075.dkr.ecr.us-west-1.amazonaws.com/plivo/app/base/python:3.11-buster
+FROM 857556598075.dkr.ecr.us-west-1.amazonaws.com/plivo/app/base/python:3.9-buster
 USER root
 RUN mkdir -p /opt/sharq-server
 WORKDIR /opt/sharq-server
