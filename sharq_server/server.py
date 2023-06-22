@@ -7,7 +7,7 @@ import ujson as json
 from flask import Flask, request, jsonify
 from redis.exceptions import LockError
 import traceback
-
+from helper_functions import validate_queue_length
 from sharq import SharQ
 
 
@@ -23,7 +23,6 @@ class SharQServer(object):
         self.config.read(config_path)
         # pass the config file to configure the SharQ core.
         self.sq = SharQ(config_path)
-
         self.app = Flask(__name__)
         # set the routes
         self.app.add_url_rule(
@@ -114,14 +113,24 @@ class SharQServer(object):
             'queue_id': queue_id
         })
 
-        try:
-            response = self.sq.enqueue(**request_data)
-        except Exception as e:
-            traceback.print_exc()
-            response['message'] = e.message
-            return jsonify(**response), 400
+        print('request_data :: ', request_data)
+        max_queued_length = request_data['max_queued_length']
 
-        return jsonify(**response), 201
+        max_queued_length = 5
+
+        enqueue_allow = validate_queue_length(self, max_queued_length, request_data)
+        if enqueue_allow:
+            try:
+                response = self.sq.enqueue(**request_data)
+            except Exception as e:
+                traceback.print_exc()
+                response['message'] = e.message
+                return jsonify(**response), 400
+
+            return jsonify(**response), 201
+        else:
+            response['message'] = 'Max call queue reached'
+            return jsonify(**response), 429
 
     def _view_dequeue(self, queue_type):
         """Dequeues a job from SharQ."""
