@@ -18,8 +18,8 @@ setup(
         'Jinja2==2.7.2',
         'MarkupSafe==0.23',
         'Werkzeug==0.9.4',
-        'gevent==20.5.0',
-        'greenlet==0.4.15',
+        'gevent==22.10.2',
+        'greenlet==2.0.2',
         'itsdangerous==0.24',
         'gunicorn==19.0',
         'ujson==2.0.0'
