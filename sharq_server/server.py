@@ -114,8 +114,6 @@ class SharQServer(object):
         })
 
         print('request_data :: ', request_data)
-        max_queued_length = request_data['max_queued_length']
-
         max_queued_length = 5
 
         enqueue_allow = validate_queue_length(self, max_queued_length, request_data)
