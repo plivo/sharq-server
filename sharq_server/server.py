@@ -99,6 +99,7 @@ class SharQServer(object):
 
     def _view_enqueue(self, queue_type, queue_id):
         """Enqueues a job into SharQ."""
+        print('Inside _view_enqueue function')
         response = {
             'status': 'failure'
         }
