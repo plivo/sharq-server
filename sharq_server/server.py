@@ -113,8 +113,8 @@ class SharQServer(object):
             'queue_type': queue_type,
             'queue_id': queue_id
         })
-
         try:
+            print('request_data :: ', request_data)
             response = self.sq.enqueue(**request_data)
         except Exception as e:
             traceback.print_exc()
