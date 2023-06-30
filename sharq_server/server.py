@@ -114,10 +114,11 @@ class SharQServer(object):
             'queue_id': queue_id
         })
 
-        print('request_data :: ', request_data)
-        max_queued_length = 5
-
+        print("Request recieved from api-voice ", request_data)
+        max_queued_length = request_data['payload'].get('max_queued_length', 7200)
+        print("max_queued_length ", max_queued_length)
         # enqueue_allow = validate_queue_length(self, max_queued_length, request_data)
+
         enqueue_allow = True
         if enqueue_allow:
             try:
