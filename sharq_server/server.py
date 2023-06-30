@@ -7,7 +7,6 @@ import ujson as json
 from flask import Flask, request, jsonify
 from redis.exceptions import LockError
 import traceback
-from helper_functions import validate_queue_length
 from sharq import SharQ
 
 
@@ -117,9 +116,8 @@ class SharQServer(object):
         print("Request recieved from api-voice ", request_data)
         max_queued_length = request_data['payload'].get('max_queued_length', 7200)
         print("max_queued_length ", max_queued_length)
-        # enqueue_allow = validate_queue_length(self, max_queued_length, request_data)
 
-        enqueue_allow = True
+        enqueue_allow = self.sq.get_queue_length(queue_type, queue_id, max_queued_length)
         if enqueue_allow:
             try:
                 response = self.sq.enqueue(**request_data)
