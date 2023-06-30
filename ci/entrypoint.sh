@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 
 CONSUL=$CONSUL
@@ -18,7 +18,8 @@ echo "
     -consul-addr "$CONSUL" \
     -template "/etc/sharq-server/config/sharq.conf.ctmpl:/etc/sharq-server/config/sharq.conf" \
     -template "/etc/sharq-server/config/sharq.ini.ctmpl:/etc/sharq-server/config/sharq.ini" \
-    -consul-retry-attempts=0 -once
+    -consul-retry-attempts=0 -once \
+    -log-level debug
 
 echo "All templates are rendered. Starting sharq-server..."
 
