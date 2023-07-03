@@ -113,14 +113,10 @@ class SharQServer(object):
             'queue_id': queue_id
         })
 
-        print("Request recieved from api-voice ", request_data)
         max_queued_length = request_data['payload'].get('max_queued_length', 7200)
-        print("max_queued_length ", max_queued_length)
 
-        enqueue_allow, current_queue_length = self.sq.get_queue_length(queue_type, queue_id, max_queued_length)
-        print("current_queue_length sharq-server ", current_queue_length)
+        enqueue_allow = self.sq.get_queue_length(queue_type, queue_id, max_queued_length)
         if enqueue_allow:
-            print('Inside enqueue_allow function....')
             try:
                 response = self.sq.enqueue(**request_data)
             except Exception as e:
@@ -130,7 +126,6 @@ class SharQServer(object):
 
             return jsonify(**response), 201
         else:
-            print('Inside else condition...')
             response['message'] = 'Max call queue reached'
             return jsonify(**response), 429
 
