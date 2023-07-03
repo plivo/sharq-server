@@ -119,7 +119,7 @@ class SharQServer(object):
 
         enqueue_allow, current_queue_length = self.sq.get_queue_length(queue_type, queue_id, max_queued_length)
         print("current_queue_length sharq-server ", current_queue_length)
-        print("enqueue_allow -->", enqueue_allow)
+        print("enqueue_allow -->", type(enqueue_allow))
         if enqueue_allow:
             try:
                 response = self.sq.enqueue(**request_data)
