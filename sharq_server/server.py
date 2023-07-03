@@ -121,6 +121,7 @@ class SharQServer(object):
         print("current_queue_length sharq-server ", current_queue_length)
         print("enqueue_allow -->", type(enqueue_allow))
         if enqueue_allow:
+            print('Inside enqueue_allow function....')
             try:
                 response = self.sq.enqueue(**request_data)
             except Exception as e:
@@ -130,6 +131,7 @@ class SharQServer(object):
 
             return jsonify(**response), 201
         else:
+            print('Inside else condition...')
             response['message'] = 'Max call queue reached'
             return jsonify(**response), 429
 
