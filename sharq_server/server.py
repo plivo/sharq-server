@@ -7,7 +7,6 @@ import ujson as json
 from flask import Flask, request, jsonify
 from redis.exceptions import LockError
 import traceback
-from helper_functions import validate_queue_length
 from sharq import SharQ
 
 
@@ -113,12 +112,9 @@ class SharQServer(object):
             'queue_id': queue_id
         })
 
-        print('request_data :: ', request_data)
-        max_queued_length = request_data['max_queued_length']
+        max_queued_length = request_data['payload'].get('max_queued_length', 7200)
 
-        max_queued_length = 5
-
-        enqueue_allow = validate_queue_length(self, max_queued_length, request_data)
+        enqueue_allow = self.sq.get_queue_length(queue_type, queue_id, max_queued_length)
         if enqueue_allow:
             try:
                 response = self.sq.enqueue(**request_data)
@@ -251,7 +247,7 @@ class SharQServer(object):
         except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
-        
+
         request_data.update({
             'queue_type': queue_type,
             'queue_id': queue_id

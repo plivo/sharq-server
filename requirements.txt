@@ -10,4 +10,4 @@ itsdangerous==0.24
 msgpack==0.5.6
 ujson==2.0.0
 uWSGI==2.0.19.1
-SharQ==1.2.0
+git+https://plivo-voice-team:b449c79293d33e2da9b7deb4aa877a295bcccc4f@github.com/plivo/sharq@VT-5650
