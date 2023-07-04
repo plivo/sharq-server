@@ -112,21 +112,35 @@ class SharQServer(object):
             'queue_id': queue_id
         })
 
-        max_queued_length = request_data['payload'].get('max_queued_length', 7200)
+        max_queued_length = request_data['payload'].get('max_queued_length', None)
 
-        enqueue_allow = self.sq.get_queue_length(queue_type, queue_id, max_queued_length)
-        if enqueue_allow:
+        if max_queued_length is not None:
+            current_queue_length = 0
+            try:
+                current_queue_length = self.sq.get_queue_length(queue_type, queue_id)
+            except Exception as e:
+                print("Error occurred while fetching redis key length as {} for auth_id {}".format(e, queue_id))
+
+            if current_queue_length < max_queued_length:
+                try:
+                    response = self.sq.enqueue(**request_data)
+                except Exception as e:
+                    traceback.print_exc()
+                    response['message'] = e.message
+                    return jsonify(**response), 400
+
+                return jsonify(**response), 201
+            else:
+                print("Max call queue limit is reached for auth_id {}".format(queue_id))
+                response['message'] = 'Max call queue reached'
+                return jsonify(**response), 429
+        else:
             try:
                 response = self.sq.enqueue(**request_data)
             except Exception as e:
                 traceback.print_exc()
                 response['message'] = e.message
                 return jsonify(**response), 400
-
-            return jsonify(**response), 201
-        else:
-            response['message'] = 'Max call queue reached'
-            return jsonify(**response), 429
 
     def _view_dequeue(self, queue_type):
         """Dequeues a job from SharQ."""
