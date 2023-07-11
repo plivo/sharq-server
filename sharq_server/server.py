@@ -131,6 +131,11 @@ class SharQServer(object):
 
                 return jsonify(**response), 201
             else:
+                """
+                We are blocking calls queuing if they reached a certain limit.
+                limit = account_cps * 6 Hours = account_cps * (6*60*60)
+                Hence blocking the calls and passing this message to customer
+                """
                 print("Max call queue limit is reached for auth_id {}".format(queue_id))
                 response['message'] = 'Max call queue reached'
                 return jsonify(**response), 429
