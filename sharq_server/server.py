@@ -112,7 +112,7 @@ class SharQServer(object):
             'queue_id': queue_id
         })
 
-        max_queued_length = request_data['payload'].get('max_queued_length', None)
+        max_queued_length = request_data['payload'].get('max_queued_length', 7200)
 
         if max_queued_length is not None:
             current_queue_length = 0
