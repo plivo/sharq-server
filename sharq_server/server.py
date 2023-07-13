@@ -112,7 +112,7 @@ class SharQServer(object):
             'queue_id': queue_id
         })
 
-        max_queued_length = request_data['payload'].get('max_queued_length', 0)
+        max_queued_length = request_data['payload'].get('max_queued_length', None)
         """
         If we are passing max_queued_length in the request from api-voice
         then only we will considered max call queue flow
