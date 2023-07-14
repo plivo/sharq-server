@@ -111,13 +111,12 @@ class SharQServer(object):
             'queue_type': queue_type,
             'queue_id': queue_id
         })
-
+        """
+        if max_queued_length is present in request param,
+        then only queue length will limit to this value
+        otherwise client can queue as much calls as he wants
+        """
         max_queued_length = request_data['payload'].get('max_queued_length', None)
-        """
-        If we are passing max_queued_length in the request from api-voice
-        then only we will considered max call queue flow
-        otherwise customer can queue as much calls as he wants
-        """
         if max_queued_length is not None:
             current_queue_length = 0
             try:
@@ -136,12 +135,6 @@ class SharQServer(object):
 
                 return jsonify(**response), 201
             else:
-                """
-                We are blocking calls queuing if they reached a certain limit.
-                limit = account_cps * 6 Hours = account_cps * (6*60*60)
-                Hence blocking the calls and passing this message to customer
-                """
-                print("Max call queue limit is reached for auth_id {}".format(queue_id))
                 response['message'] = 'Max queue length reached'
                 response['current_queue_length'] = current_queue_length
                 return jsonify(**response), 429
