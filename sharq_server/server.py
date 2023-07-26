@@ -146,6 +146,8 @@ class SharQServer(object):
                 response['message'] = e.message
                 return jsonify(**response), 400
 
+            return jsonify(**response), 201
+
     def _view_dequeue(self, queue_type):
         """Dequeues a job from SharQ."""
         response = {
