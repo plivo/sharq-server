@@ -1,14 +1,14 @@
-Flask==0.10.1
-Jinja2==2.7.2
-MarkupSafe==0.23
-Werkzeug==0.11.11
-argparse==1.2.1
+Flask==2.0.3
+Jinja2==3.0.3
+MarkupSafe==2.0.1
+Werkzeug==2.0.3
+argparse==1.4.0
 gevent==22.10.2
 greenlet==2.0.2
-gunicorn==19.5.0
-itsdangerous==0.24
-msgpack==0.5.6
-ujson==2.0.0
+gunicorn==21.2.0
+itsdangerous==2.0.1
+msgpack==1.0.5
+ujson==4.3.0
 uWSGI==2.0.21
 SharQ==1.2.0
 
