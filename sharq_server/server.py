@@ -170,6 +170,12 @@ class SharQServer(object):
             response['message'] = e.message
             return jsonify(**response), 400
 
+        current_queue_length = 0
+        try:
+            current_queue_length = self.sq.get_queue_length(queue_type, response['queue_id'])
+        except Exception as e:
+            print("DEQUEUE::Error occurred while fetching redis key length as {} for auth_id {}".format(e, response['queue_id']))
+        response['current_queue_length'] = current_queue_length
         return jsonify(**response)
 
     def _view_finish(self, queue_type, queue_id, job_id):
