@@ -163,6 +163,13 @@ class SharQServer(object):
             response = self.sq.dequeue(**request_data)
             if response['status'] == 'failure':
                 return jsonify(**response), 404
+            current_queue_length = 0
+            try:
+                current_queue_length = self.sq.get_queue_length(queue_type, response['queue_id'])
+            except Exception as e:
+                print("DEQUEUE::Error occurred while fetching redis key length as {} for auth_id {}".format(e, response[
+                    'queue_id']))
+            response['current_queue_length'] = current_queue_length
         except Exception as e:
             import traceback
             for line in traceback.format_exc().splitlines():
