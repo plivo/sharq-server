@@ -167,7 +167,7 @@ class SharQServer(object):
             try:
                 current_queue_length = self.sq.get_queue_length(queue_type, response['queue_id'])
             except Exception as e:
-                print("DEQUEUE::Error occurred while fetching redis key length as {} for auth_id {}".format(e, response[
+                print("DEQUEUE::Error occurred while fetching redis key length {} for queue_id {}".format(e, response[
                     'queue_id']))
             response['current_queue_length'] = current_queue_length
         except Exception as e:
