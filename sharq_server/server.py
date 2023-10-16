@@ -2,7 +2,7 @@
 # Copyright (c) 2014 Plivo Team. See LICENSE.txt for details.
 import os
 import gevent
-import ConfigParser
+import configparser
 import ujson as json
 from flask import Flask, request, jsonify
 
@@ -17,7 +17,7 @@ class SharQServer(object):
     def __init__(self, config_path):
         """Load the SharQ config and define the routes."""
         # read the configs required by sharq-server.
-        self.config = ConfigParser.SafeConfigParser()
+        self.config = configparser.ConfigParser()
         self.config.read(config_path)
         # pass the config file to configure the SharQ core.
         self.sq = SharQ(config_path)
@@ -73,7 +73,7 @@ class SharQServer(object):
         }
         try:
             request_data = json.loads(request.data)
-        except Exception, e:
+        except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -84,7 +84,7 @@ class SharQServer(object):
 
         try:
             response = self.sq.enqueue(**request_data)
-        except Exception, e:
+        except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -103,7 +103,7 @@ class SharQServer(object):
             response = self.sq.dequeue(**request_data)
             if response['status'] == 'failure':
                 return jsonify(**response), 404
-        except Exception, e:
+        except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -124,7 +124,7 @@ class SharQServer(object):
             response = self.sq.finish(**request_data)
             if response['status'] == 'failure':
                 return jsonify(**response), 404
-        except Exception, e:
+        except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -138,7 +138,7 @@ class SharQServer(object):
         try:
             request_data = json.loads(request.data)
             interval = request_data['interval']
-        except Exception, e:
+        except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -152,7 +152,7 @@ class SharQServer(object):
             response = self.sq.interval(**request_data)
             if response['status'] == 'failure':
                 return jsonify(**response), 404
-        except Exception, e:
+        except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -171,7 +171,7 @@ class SharQServer(object):
 
         try:
             response = self.sq.metrics(**request_data)
-        except Exception, e:
+        except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
 
@@ -184,7 +184,7 @@ class SharQServer(object):
         }
         try:
             request_data = json.loads(request.data)
-        except Exception, e:
+        except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
         
@@ -194,7 +194,7 @@ class SharQServer(object):
         })
         try:
             response = self.sq.clear_queue(**request_data)
-        except Exception, e:
+        except Exception as e:
             response['message'] = e.message
             return jsonify(**response), 400
 
