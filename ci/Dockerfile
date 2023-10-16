@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:3.11
 
 ENV CONSUL_TEMPLATE_VERSION 0.19.5
 RUN mkdir -p /opt/sharq-server
