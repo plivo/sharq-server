@@ -5,7 +5,7 @@ job_requeue_interval : 1000
 ;; in milliseconds
 default_job_requeue_limit : -1 
 ;; retries infinitely
-enable_requeue_script : {{ parseBool (keyOrDefault (printf "%s/%s/%s/%s/config/sharq/enable_requeue_script" $team $appenv $sharq_type $region) "false" ) }}
+enable_requeue_script : {{ parseBool (keyOrDefault (printf "%s/%s/%s/%s/config/sharq/enable_requeue_script" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") (env "REGION")) "false" ) }}
 
 [sharq-server]
 host                 : 127.0.0.1
