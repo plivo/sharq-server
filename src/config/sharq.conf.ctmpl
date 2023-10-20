@@ -1,3 +1,8 @@
+{{$region := env "REGION"}}
+{{$appenv := env "ENVIRONMENT"}}
+{{$team := env "TEAM"}}
+{{$sharq_type := env "SHARQ_TYPE"}}
+
 [sharq]
 job_expire_interval  : 45000 
 ;; in milliseconds
@@ -26,3 +31,4 @@ conn_type            : tcp_sock
 port                 : {{ printf "%s/%s/%s/config/redis/port" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") | key | parseInt }}
 host                 : {{ printf "%s/%s/%s/config/redis/host" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") | key }}
 clustered            : {{ printf "%s/%s/%s/config/redis/clustered" (env "TEAM") (env "ENVIRONMENT") (env "SHARQ_TYPE") | key }}
+password             : {{ printf "%s/%s/%s/%s/config/redis/password" $team $appenv $sharq_type $region | key }}
