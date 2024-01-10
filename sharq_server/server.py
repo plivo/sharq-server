@@ -269,7 +269,7 @@ class SharQServer(object):
     def _view_worker_health_status(self):
         """Checks worker health status"""
         try:
-            key = self.config.get('region', 'msg-worker-nps:us-west-1')
+            key = self.config.get('redis', 'worker_health_key')
             self.sq.worker_health_status(key)
             response = {
                 'status': "success"
