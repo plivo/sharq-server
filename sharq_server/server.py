@@ -270,7 +270,12 @@ class SharQServer(object):
         """Checks worker health status"""
         try:
             key = self.config.get('redis', 'worker_health_key')
-            self.sq.worker_health_status(key)
+            value = self.sq.worker_health_status(key)
+            if value is None:
+                response = {
+                'status': "failure",
+                }
+                return jsonify(**response), 500
             response = {
                 'status': "success"
             }
