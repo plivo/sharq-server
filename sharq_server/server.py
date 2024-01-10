@@ -56,6 +56,9 @@ class SharQServer(object):
         self.app.add_url_rule(
             '/deepstatus/',
             view_func=self._view_deep_status, methods=['GET'])
+        self.app.add_url_rule(
+            '/workerhealthstatus/',
+            view_func=self._view_worker_health_status, methods=['GET'])
 
     def requeue(self):
         """Loop endlessly and requeue expired jobs."""
@@ -253,6 +256,21 @@ class SharQServer(object):
         try:
 
             self.sq.deep_status()
+            response = {
+                'status': "success"
+            }
+            return jsonify(**response)
+        except Exception as e:
+            print(e)
+            import traceback
+            for line in traceback.format_exc().splitlines():
+                print(line)
+            raise Exception
+    def _view_worker_health_status(self):
+        """Checks worker health status"""
+        try:
+            key = self.config.get('region', 'msg-worker-nps:us-west-1')
+            self.sq.worker_health_status(key)
             response = {
                 'status': "success"
             }
