@@ -273,6 +273,7 @@ class SharQServer(object):
             key = self.config.get('redis', 'worker_health_key')
             with self.sq.redis_client().lock('worker-health-lock-key', timeout=2):
                 value = self.sq.worker_health_status(key)
+                print(key, value)
                 if value is None:
                     return jsonify(**response), 500
                 return jsonify(**response)
