@@ -271,16 +271,16 @@ class SharQServer(object):
         try:
             response = {}
             key = self.config.get('redis', 'worker_health_key')
-            # with self.sq.redis_client().lock('worker-health-lock-key', timeout=2):
-            value = self.sq.worker_health_status(key)
-            print(key, value)
-            if value is None:
-                return jsonify(**response), 500
-            return jsonify(**response)
-        # except LockError:
+            with self.sq.redis_client().lock('worker-health-lock-key', timeout=2): # will be changed later
+                value = self.sq.worker_health_status(key)
+                print(key, value)
+                if value is None:
+                    return jsonify(**response), 500
+                return jsonify(**response)
+        except LockError:
             # the lock wasn't acquired within specified time
-            # print("worker-health-lock-key lock not acquired", key)
-            # return jsonify(**response)
+            print("worker-health-lock-key lock not acquired", key)
+            return jsonify(**response)
         except Exception as e:
             print(e)
             import traceback
