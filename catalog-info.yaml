@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sharq-server
+  annotations:
+    github.com/project-slug: plivo/sharq-server
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=sharq-server'
+    backstage.io/kubernetes-namespace: 'messaging'
+    plivo/config-app-name: 'sharq-server'
+    plivo/team: 'messaging'
+    plivo/subteam: 'sms'
+    plivo/language: 'golang'
+    plivo/secret-app-name: 'sharq-server'
+    jenkins.io/job-full-name: 'plivo/sharq-server'
+spec:
+  type: service
+  lifecycle: unknown
+  owner: messaging
