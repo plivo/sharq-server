@@ -3,6 +3,6 @@
 @Library('plivo_standard_libs@production') _
 
 deliveryPipeline ([
-	buildContainer: 'plivo/jenkins-ci/python/2.7.14/ci-base/ubuntu/trusty:18.02.01.139',
+	buildContainer: 'plivo/jenkins-ci/platform_apiservice/ubuntu/trusty:18.03.02.217',
 	disableQAStages: true
 ])
