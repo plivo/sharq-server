@@ -15,7 +15,7 @@ setup(
     py_modules=['runner'],
     install_requires=[
         'Flask==0.10.1',
-        'Jinja2==2.7.2',
+        'Jinja2==2.11.3',
         'MarkupSafe==0.23',
         'Werkzeug==0.11.11',
         'gevent==22.10.2',
