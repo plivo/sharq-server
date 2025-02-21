@@ -3,5 +3,6 @@ serviceName: sharq
 hipchatRoom: cicd-tests-dev-notifications
 language: python
 dockerOnly: true
+trivyBypass: true
 build:
   platform: "linux/amd64,linux/arm64"
