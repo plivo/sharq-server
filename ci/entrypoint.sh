@@ -6,8 +6,8 @@ set -ex
 CONSUL=$CONSUL
 export REGION=$AWS_REGION
 export ENVIRONMENT=$APP_ENV
-export TEAM = $TEAM
-export SHARQ_TYPE = $SHARQ_TYPE
+export TEAM=$TEAM
+export SHARQ_TYPE=$SHARQ_TYPE
 
 echo "
       ___ _              ___    ___
