@@ -12,6 +12,7 @@ sharq_config_path = os.path.abspath(sharq_config_path)
 server = setup_server(sharq_config_path)
 print(f"SharQ config path: {sharq_config_path}")
 app = server.app
+print(f"App: {app}")
 
 
 if __name__ == '__main__':
