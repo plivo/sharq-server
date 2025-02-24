@@ -10,8 +10,11 @@ from sharq_server import setup_server
 sharq_config_path = os.environ.get('SHARQ_CONFIG', './sharq.conf')
 sharq_config_path = os.path.abspath(sharq_config_path)
 server = setup_server(sharq_config_path)
+print(f"SharQ config path: {sharq_config_path}")
 app = server.app
 
 
 if __name__ == '__main__':
+    print("SharQ server started")
     app.run()
+    print("SharQ server stopped")

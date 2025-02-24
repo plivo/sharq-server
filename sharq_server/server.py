@@ -294,6 +294,7 @@ def setup_server(config_path):
     and return the server."""
     # configure the SharQ server
     server = SharQServer(config_path)
+    print("SharQ server configured")
     # start the requeue loop
     gevent.spawn(server.requeue_with_lock)
 
