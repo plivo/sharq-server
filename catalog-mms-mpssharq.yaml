@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: mms-mpssharq
+  annotations:
+    github.com/project-slug: plivo/mms-mpssharq
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=mms-mpssharq'
+    backstage.io/kubernetes-namespace: 'messaging'
+    plivo/config-app-name: 'mms-mpssharq'
+    plivo/team: 'messaging'
+    plivo/subteam: 'mms'
+    plivo/language: 'python'
+    plivo/secret-app-name: 'mms-mpssharq'
+    jenkins.io/job-full-name: 'plivo/mms-mpssharq'
+spec:
+  type: service
+  lifecycle: unknown
+  owner: messaging
