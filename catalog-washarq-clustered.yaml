@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: washarq-clustered
+  annotations:
+    github.com/project-slug: plivo/washarq-clustered
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=washarq-clustered'
+    backstage.io/kubernetes-namespace: 'messaging'
+    plivo/config-app-name: 'washarq-clustered'
+    plivo/team: 'messaging'
+    plivo/subteam: 'sms'
+    plivo/language: 'python'
+    plivo/secret-app-name: 'washarq-clustered'
+    jenkins.io/job-full-name: 'plivo/washarq-clustered'
+spec:
+  type: service
+  lifecycle: unknown
+  owner: messaging
