@@ -16,7 +16,7 @@ accesslog            : /tmp/sharq.log
 
 [redis]
 db                   : 0
-key_prefix           : {{ printf "%s/%s/%s/%s/config/redis/key_prefix" $team $appenv $sharq_type $region | key }}
+key_prefix           : {{ printf "%s/%s/%s/%s/config/redis/common_key_prefix" $team $appenv $sharq_type $region | key }}
 conn_type            : tcp_sock
 port                 : {{ printf "%s/%s/%s/%s/config/redis/port" $team $appenv $sharq_type $region | key | parseInt }}
 host                 : {{ printf "%s/%s/%s/%s/config/redis/host" $team $appenv $sharq_type $region | key }}
