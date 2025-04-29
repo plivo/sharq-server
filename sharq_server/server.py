@@ -56,6 +56,9 @@ class SharQServer(object):
         self.app.add_url_rule(
             '/deepstatus/',
             view_func=self._view_deep_status, methods=['GET'])
+        self.app.add_url_rule(
+            '/workerhealthstatus/',
+            view_func=self._view_worker_health_status, methods=['GET'])
 
     def requeue(self):
         """Loop endlessly and requeue expired jobs."""
@@ -256,6 +259,27 @@ class SharQServer(object):
             response = {
                 'status': "success"
             }
+            return jsonify(**response)
+        except Exception as e:
+            print(e)
+            import traceback
+            for line in traceback.format_exc().splitlines():
+                print(line)
+            raise Exception
+    def _view_worker_health_status(self):
+        """Checks worker health status"""
+        try:
+            response = {}
+            key = self.config.get('redis', 'worker_health_key')
+            with self.sq.redis_client().lock('worker-health-lock-key', timeout=2): # will be changed later
+                value = self.sq.worker_health_status(key)
+                print(key, value)
+                if value is None:
+                    return jsonify(**response), 500
+                return jsonify(**response)
+        except LockError:
+            # the lock wasn't acquired within specified time
+            print("worker-health-lock-key lock not acquired", key)
             return jsonify(**response)
         except Exception as e:
             print(e)
