@@ -4,7 +4,15 @@ set -ex
 
 
 CONSUL=$CONSUL
+if [[ -z "$REGION" && -n "$AWS_REGION" ]]; then
+  export REGION="$AWS_REGION"
+fi
 
+if [[ -z "$ENVIRONMENT" && -n "$APP_ENV" ]]; then
+  export ENVIRONMENT="$APP_ENV"
+fi
+export TEAM=$TEAM
+export SHARQ_TYPE=$SHARQ_TYPE
 
 echo "
       ___ _              ___    ___
