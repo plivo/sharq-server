@@ -5,3 +5,4 @@ language: python
 dockerOnly: true
 build:
   platform: "linux/amd64,linux/arm64"
+  ecrRegistries: plivo-dev-sms,zentrunk,plivo-dev-voice,contacto-prod
