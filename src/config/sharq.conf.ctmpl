@@ -22,3 +22,4 @@ port                 : {{ printf "%s/%s/%s/%s/config/redis/port" $team $appenv $
 host                 : {{ printf "%s/%s/%s/%s/config/redis/host" $team $appenv $sharq_type $region | key }}
 clustered            : {{ printf "%s/%s/%s/%s/config/redis/clustered" $team $appenv $sharq_type $region | key }}
 password             : {{ printf "%s/%s/%s/%s/config/redis/password" $team $appenv $sharq_type $region | key }}
+worker_health_key    : {{ printf "%s/%s/%s/%s/config/redis/worker_health_key" $team $appenv $sharq_type $region | key }}

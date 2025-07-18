@@ -119,3 +119,4 @@ A sample configuration file looks like this. You can also get this configuration
     ;; tcp connection settings
     port                 : 6379
     host                 : 127.0.0.1
+    worker_health_key    :  msg-worker-nps:us-east-1
